@@ -7,11 +7,20 @@
   - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
   - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
   - price_class: {String} Adds a price class to the price element (optional)
+  - price_color: {String} Adds a price class to the price element (optional)
   - show_compare_at_price: {Boolean} Renders the compare at price if the product matches the condition (optional)
 
   Usage:
   {% render 'price', product: product %}
 {% endcomment %}
+
+
+{%- style -%}
+  .price-item.price-item--sale {
+    color : {{ price_color }}
+  }
+{%- endstyle -%}
+
 {%- liquid
   if use_variant
     assign target = product.selected_or_first_available_variant

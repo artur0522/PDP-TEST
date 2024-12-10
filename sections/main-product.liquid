@@ -111,7 +111,8 @@
                     product: product,
                     use_variant: true,
                     show_badges: true,
-                    price_class: 'price--large'
+                    price_class: 'price--large',
+                    price_color: block.settings.price_color,
                   -%}
                 </div>
                 {%- if product.quantity_price_breaks_configured? -%}
@@ -194,7 +195,18 @@
               {%- when 'description' -%}
                 {%- if product.description != blank -%}
                   <div class="product__description rte quick-add-hidden" {{ block.shopify_attributes }}>
-                    {{ product.description }}
+                    <div class="product-desc-info-container">
+                      <div class="product-desc-info-content">
+                        <div class="product-desc-info-full-content">
+                          {{ product.description }}
+                        </div>
+                      </div>
+                      <div class="product-desc-info-read-more">
+                        <a href="#" class="product-desc-info-read-more-btn disabled">
+                          read more
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 {%- endif -%}
               {%- when 'sku' -%}
@@ -773,7 +785,15 @@
     {
       "type": "price",
       "name": "t:sections.main-product.blocks.price.name",
-      "limit": 1
+      "limit": 1,
+      "settings": [
+        {
+          "type": "color",
+          "id": "price_color",
+          "label": "Price Color",
+          "default": "#000000"
+        },
+      ],
     },
     {
       "type": "sku",
